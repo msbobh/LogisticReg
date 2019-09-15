@@ -49,10 +49,7 @@ namespace LogisticReg
                 string trainingfile = args[0];
                 string labelfile = args[1];
                 // maybe add check for csv format??
-                if (!utilityfunctions.ValidateCSV(trainingfile)) System.Environment.Exit(-1);
-                if (!utilityfunctions.ValidateCSV(labelfile)) System.Environment.Exit(-1);
-
-
+                
                 /*
                  * Delimited Reader Param description
                  * Delimited Reader (only Single, Double, Complex and COmplex32)

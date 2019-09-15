@@ -80,30 +80,7 @@ namespace Functions
             return Theta;
         }
 
-        static public bool ValidateCSV(string path)
-        {
-                                   
-            using (var parser = new TextFieldParser(path))
-            {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
-
-                string[] line;
-                while (!parser.EndOfData)
-                {
-                    try
-                    {
-                        line = parser.ReadFields();
-                    }
-                    catch (MalformedLineException ex)
-                    {
-                        Console.WriteLine("not a well formatted CSV");
-                        return false;
-                    }
-                }
-                return true;
-            }
-        }
+        
     }
 }
 
