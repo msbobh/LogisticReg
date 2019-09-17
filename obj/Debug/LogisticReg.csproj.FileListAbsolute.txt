@@ -1,7 +1,6 @@
 C:\Users\rober\github\LogisticReg\bin\Debug\LogisticReg.exe.config
 C:\Users\rober\github\LogisticReg\bin\Debug\LogisticReg.exe
 C:\Users\rober\github\LogisticReg\bin\Debug\LogisticReg.pdb
-C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csprojAssemblyReference.cache
 C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csproj.CoreCompileInputs.cache
 C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.exe
 C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.pdb
@@ -12,3 +11,4 @@ C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.xml
 C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.Data.Matlab.xml
 C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.Data.Text.xml
 C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csproj.CopyComplete
+C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csprojAssemblyReference.cache

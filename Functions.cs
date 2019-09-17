@@ -29,29 +29,27 @@ namespace Functions
             int m = inMatrix.RowCount;
             int cols = inMatrix.ColumnCount;
             double J = 0;
+            double regterm;
             //Matrix<double> grad = Matrix<double>.Build.Dense(m, cols);
             // Vectorized 
             Matrix<double> z, hypothesis;
             z = inMatrix * Theta;
             hypothesis = utilityfunctions.Sigmoid(z);
 
-            /* Regularization term excluding theta (0) Note both L1 and L2
-             * regularization routines  are provided, comment/uncomment
-             * as appropriate
-             */
-            Theta.RemoveRow(0);
-            Theta = Theta.PointwisePower(2);
-            double regterm = (lambda / (2 * m)) * (Theta.RowSums().Sum());
+            regterm = utilityfunctions.L2Regularization(Theta, lambda, m);
+
+            /* J = (1/m) * sum (( - y.* log(hypothesis)) - (( 1 -y).* log(1-hypothesis))) + reg_term; */
+            // Decomposition to check accuracy of primary equation
+            Matrix<double> hypothesis1 = hypothesis.PointwiseLog();
+            Matrix<double> term1 = -y.PointwiseMultiply(hypothesis1);
+            Matrix<double> hypothesis2 = (1 - hypothesis).PointwiseLog();
+            Matrix<double> term2 = (1 - y).PointwiseMultiply(hypothesis2);
+            Matrix <double> foo = (term1 - term2);
+            double foop = foo.RowSums().Sum();
+            double foopfoop = foop + regterm;
+            // Whew!!
             
-            /* sum (( - y.* log(hypothesis)) - (( 1 -y).* log(1-hypothesis))) */
-
             J = ((-y.PointwiseMultiply(hypothesis.PointwiseLog()) - ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1 - y)).RowSums().Sum()) + regterm;
-
-            /*Matrix<double> term1 = -y.PointwiseMultiply(hypothesis.PointwiseLog());
-            Matrix<double> term2 = ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1-y);
-
-            J = (term1 - term2).RowSums().Sum();
-            */
 
             return J;
         }
@@ -80,7 +78,30 @@ namespace Functions
             return Theta;
         }
 
-        
+        static public double L2Regularization (Matrix<double> Theta, double lambda, int m )
+        {
+            /* Regularization term excluding theta (0) Note both L1 and L2
+             * regularization routines  are provided, comment/uncomment
+             * as appropriate
+             *          
+             * L2 regularization uses the squared magnitude of coefficient
+             * as penalty term to the loss function.
+             */
+
+            Theta = Theta.RemoveRow(0);
+            Theta = Theta.PointwisePower(2);
+            double foo = Theta.RowSums().Sum();
+            double regterm = (lambda / (2 * m)) * (Theta.RowSums().Sum());
+            return regterm;
+        }
+
+        static public double L1Regularization (Matrix<double> Theta, Double lambda, int m)
+        {
+            Theta = Theta.RemoveRow(0);
+            Theta = Theta.PointwiseAbs();
+            double regterm = (lambda / (2 * m)) * (Theta.RowSums().Sum());
+            return regterm;
+        }
     }
 }
 

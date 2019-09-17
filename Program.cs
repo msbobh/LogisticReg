@@ -17,13 +17,6 @@ namespace LogisticReg
     
         class Program
         {
-            private Matrix<int> sigmoid(Matrix<int> z)
-            {
-                //nt x = z. ()
-                //Matrix<int> g = Matrix<int>.Build.Dense.(x,y)
-
-                return (z);
-            }
             static void Main(string[] args)
             {
                 // Constants
@@ -99,7 +92,7 @@ namespace LogisticReg
                 double lambda = 1;
                 Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations);
 
-
+                // Use Delimited write to save the value of Theta
                 // DelimitedWriter.Write("test.csv", g, ",");
 
             }

@@ -1,0 +1,6 @@
+*.model
+*.suo
+*.ide
+/.vs/*
+obj/
+
