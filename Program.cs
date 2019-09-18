@@ -66,7 +66,7 @@ namespace LogisticReg
 
                 // Initial guess for Theta is all zeros and n x 1 vector of zeros, where n is the number of features (columns)
 
-                Matrix<double> init_theta = Matrix<double>.Build.Dense(cols, 1);
+                Matrix<double> init_theta = Matrix<double>.Build.Dense(cols,1);
 
                 Matrix<double> g = Matrix<double>.Build.Dense(rows, cols);
                 // calling sigmoid function = utilityfunctions.Sigmoid(input);

@@ -56,6 +56,7 @@ namespace Functions
 
         static public Matrix <double> GradientDescent(Matrix<double> X, Matrix<double> y, Matrix<double> Theta, double alpha, int iterations)
         {
+            double lambda = 10;
             double[] J_history = new double[iterations];
             J_history.Initialize();
             Matrix<double> error;
@@ -65,14 +66,14 @@ namespace Functions
             {
                 error = (X * Theta) - y;
                 Theta = Theta - ((alpha / m) * X.Transpose() * error);
-                J_history[i] = utilityfunctions.CostFunc(X, Theta,y,1);
+                J_history[i] = utilityfunctions.CostFunc(X, Theta,y,lambda);
                 Console.Write('.');
                 if ( i % Console.WindowWidth -1 == 0) Console.WriteLine();
             }
             int x = 1;
-            foreach (var thingy in J_history)
+            foreach (var cost in J_history)
             {
-                Console.WriteLine("J:{0}", thingy);
+                Console.WriteLine("J:{0}", cost);
                 x++;
             }
             return Theta;
