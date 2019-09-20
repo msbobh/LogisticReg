@@ -69,14 +69,8 @@ namespace LogisticReg
                 Matrix<double> init_theta = Matrix<double>.Build.Dense(cols,1);
 
                 Matrix<double> g = Matrix<double>.Build.Dense(rows, cols);
-                // calling sigmoid function = utilityfunctions.Sigmoid(input);
-
-                /* Call gradient Descent Routine
-                 * fprintf('\nRunning Gradient Descent ...\n')
-                 * run gradient descent 
-                 * theta = gradientDescent(X, y, theta, alpha, iterations)
-                 */
-                int iterations = 3500;
+                
+                int iterations = 20;
                 double alpha = 0.01; // Alpha values to try .001, .003, .01, .03, .1, .3, 1 
                 Console.WriteLine(mystrings.running, iterations);
 
@@ -87,8 +81,7 @@ namespace LogisticReg
                  * 
                  */
 
-                // test code
-
+                
                 double lambda = 1;
                 Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations);
 

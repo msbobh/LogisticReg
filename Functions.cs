@@ -20,6 +20,12 @@ namespace Functions
              return input;
         }
 
+        static public Matrix<double> Linear(Matrix<double> x)
+        {
+            // h of x = ThetaTranspose * X which has already been calced
+            return x;
+        }
+
 
         static public double CostFunc (Matrix<double> inMatrix, Matrix<double> Theta,Matrix<double> y, double lambda)
         {
@@ -34,12 +40,14 @@ namespace Functions
             // Vectorized 
             Matrix<double> z, hypothesis;
             z = inMatrix * Theta;
-            hypothesis = utilityfunctions.Sigmoid(z);
+            // some issues here, shouldnt this be transpose?
+
+            //hypothesis = utilityfunctions.Sigmoid(z);
 
             regterm = utilityfunctions.L2Regularization(Theta, lambda, m);
 
-            /* J = (1/m) * sum (( - y.* log(hypothesis)) - (( 1 -y).* log(1-hypothesis))) + reg_term; */
-            // Decomposition to check accuracy of primary equation
+
+            /* Decomposition to check accuracy of primary equation
             Matrix<double> hypothesis1 = hypothesis.PointwiseLog();
             Matrix<double> term1 = -y.PointwiseMultiply(hypothesis1);
             Matrix<double> hypothesis2 = (1 - hypothesis).PointwiseLog();
@@ -47,15 +55,21 @@ namespace Functions
             Matrix <double> foo = (term1 - term2);
             double foop = foo.RowSums().Sum();
             double foopfoop = foop + regterm;
-            // Whew!!
-            
-            J = ((-y.PointwiseMultiply(hypothesis.PointwiseLog()) - ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1 - y)).RowSums().Sum()) + regterm;
+            Whew!
+            */
+
+            /* J = (1/m) * sum (( - y.* log(hypothesis)) - (( 1 -y).* log(1-hypothesis))) + reg_term; */
+            J = (1/m) * ((-y.PointwiseMultiply(hypothesis.PointwiseLog()) - ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1 - y)).RowSums().Sum()) + regterm;
 
             return J;
         }
 
         static public Matrix <double> GradientDescent(Matrix<double> X, Matrix<double> y, Matrix<double> Theta, double alpha, int iterations)
         {
+            /* Performs Gradient Descent to learn Theta, updates theta by
+             * taking num_iters gradient steps with learning rate alpha
+             */
+
             double lambda = 10;
             double[] J_history = new double[iterations];
             J_history.Initialize();
