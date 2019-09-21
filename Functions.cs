@@ -42,12 +42,12 @@ namespace Functions
             z = inMatrix * Theta;
             // some issues here, shouldnt this be transpose?
 
-            //hypothesis = utilityfunctions.Sigmoid(z);
+            hypothesis = utilityfunctions.Sigmoid(z);
 
             regterm = utilityfunctions.L2Regularization(Theta, lambda, m);
 
 
-            /* Decomposition to check accuracy of primary equation
+             //Decomposition to check accuracy of primary equation
             Matrix<double> hypothesis1 = hypothesis.PointwiseLog();
             Matrix<double> term1 = -y.PointwiseMultiply(hypothesis1);
             Matrix<double> hypothesis2 = (1 - hypothesis).PointwiseLog();
@@ -55,11 +55,14 @@ namespace Functions
             Matrix <double> foo = (term1 - term2);
             double foop = foo.RowSums().Sum();
             double foopfoop = foop + regterm;
-            Whew!
-            */
-
+            double foopity = 0.0084746;
+            float fred = (1 / m);
+            double foopJ = foopity * foopfoop;
+            //Whew!
+            
+            
             /* J = (1/m) * sum (( - y.* log(hypothesis)) - (( 1 -y).* log(1-hypothesis))) + reg_term; */
-            J = (1/m) * ((-y.PointwiseMultiply(hypothesis.PointwiseLog()) - ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1 - y)).RowSums().Sum()) + regterm;
+            J = (1/ (double)m) * ((-y.PointwiseMultiply(hypothesis.PointwiseLog()) - ((1 - hypothesis).PointwiseLog()).PointwiseMultiply(1 - y)).RowSums().Sum()) + regterm;
 
             return J;
         }
@@ -79,8 +82,8 @@ namespace Functions
             for (int i = 0; i < iterations; i++)
             {
                 error = (X * Theta) - y;
-                Theta = Theta - ((alpha / m) * X.Transpose() * error);
                 J_history[i] = utilityfunctions.CostFunc(X, Theta,y,lambda);
+                Theta = Theta - ((alpha / m) * X.Transpose() * error);
                 Console.Write('.');
                 if ( i % Console.WindowWidth -1 == 0) Console.WriteLine();
             }
