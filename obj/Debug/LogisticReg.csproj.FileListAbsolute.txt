@@ -11,3 +11,4 @@ C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.xml
 C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.Data.Matlab.xml
 C:\Users\rober\github\LogisticReg\bin\Debug\MathNet.Numerics.Data.Text.xml
 C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csproj.CopyComplete
+C:\Users\rober\github\LogisticReg\obj\Debug\LogisticReg.csprojAssemblyReference.cache
