@@ -2,6 +2,7 @@
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using Microsoft.VisualBasic.FileIO;
+using System.IO;
 
 
 namespace Functions
@@ -20,14 +21,26 @@ namespace Functions
              return input;
         }
 
-        static public Matrix<double> Linear(Matrix<double> x)
+        static public bool WriteCSV(string fname, double[] data)
         {
-            // h of x = ThetaTranspose * X which has already been calced
-            return x;
+
+            StreamWriter outfile = null;
+            try { outfile = new StreamWriter(fname); }
+            catch (Exception e)
+            {
+                Console.WriteLine(strings.mystrings.File_Error, e);
+                System.Environment.Exit(-1);
+            }
+            foreach (var row in data)
+            {
+                outfile.WriteLine(row.ToString());
+            }
+            outfile.Close();
+            return true;
         }
 
 
-        static public double CostFunc (Matrix<double> inMatrix, Matrix<double> Theta,Matrix<double> y, double lambda)
+            static public double CostFunc (Matrix<double> inMatrix, Matrix<double> Theta,Matrix<double> y, double lambda)
         {
             /* 
              * Computes the cost of using theta as the parameter for logistic regression to fit the data points in X and y
@@ -93,6 +106,7 @@ namespace Functions
                 Console.WriteLine("J:{0}", cost);
                 x++;
             }
+            utilityfunctions.WriteCSV("testcsv.csv", J_history);
             return Theta;
         }
 

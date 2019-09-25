@@ -3,4 +3,5 @@
 *.ide
 /.vs/*
 obj/
+bin/Debug/testcsv.csv
 
