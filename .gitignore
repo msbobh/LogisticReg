@@ -5,4 +5,6 @@
 obj/
 bin/Debug/testcsv.csv
 bin/Debug/testcsv*.csv
-
+bin/Debug/JValues.csv
+bin/Debug/LearnedTheta.csv
+bin/Debug/LearnedTheta1.csv
