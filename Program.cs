@@ -70,8 +70,8 @@ namespace LogisticReg
 
                 Matrix<double> g = Matrix<double>.Build.Dense(rows, cols);
                 
-                int iterations = 1000;
-                double alpha = 0.1; // Alpha values to try .001, .003, .01, .03, .1, .3, 1 
+                int iterations = 100;
+                double alpha = 0.03; // Alpha values to try .001, .003, .01, .03, .1, .3, 1 
                 Console.WriteLine(mystrings.running, iterations);
 
 

@@ -4,4 +4,5 @@
 /.vs/*
 obj/
 bin/Debug/testcsv.csv
+bin/Debug/testcsv*.csv
 

@@ -21,9 +21,39 @@ namespace Functions
              return input;
         }
 
+        static bool IsFileinUse(FileInfo file)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+            return false;
+        }
+
         static public bool WriteCSV(string fname, double[] data)
         {
-
+            FileInfo filepath = new FileInfo(fname);
+            if ((utilityfunctions.IsFileinUse(filepath) == true))
+            {
+                Console.WriteLine("Oops!");
+                fname = (fname + '1');
+            }
+            fname = fname + ".csv";
             StreamWriter outfile = null;
             try { outfile = new StreamWriter(fname); }
             catch (Exception e)
@@ -31,6 +61,7 @@ namespace Functions
                 Console.WriteLine(strings.mystrings.File_Error, e);
                 System.Environment.Exit(-1);
             }
+
             foreach (var row in data)
             {
                 outfile.WriteLine(row.ToString());
@@ -106,7 +137,7 @@ namespace Functions
                 Console.WriteLine("J:{0}", cost);
                 x++;
             }
-            utilityfunctions.WriteCSV("testcsv.csv", J_history);
+            utilityfunctions.WriteCSV("testcsv", J_history);
             return Theta;
         }
 
