@@ -19,7 +19,7 @@ namespace LogisticReg
             // Initializations
             double alpha = .01; // Alpha values to try .001, .003, .01, .03, .1, .3, 1 
             double Lambda = 10;
-            int iterations = 500;
+            int iterations = 1500;
             string ThetaFile = "Thetasave.csv";
 
             if (args.Length < 2)
@@ -114,9 +114,6 @@ namespace LogisticReg
             }
                 
             
-            // Use Delimited write to save the value of Theta
-            // DelimitedWriter.Write("test.csv", g, ",");
-
         }
     }
 
