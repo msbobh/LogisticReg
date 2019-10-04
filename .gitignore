@@ -8,3 +8,9 @@ bin/Debug/testcsv*.csv
 bin/Debug/JValues.csv
 bin/Debug/LearnedTheta.csv
 bin/Debug/LearnedTheta1.csv
+bin/Debug/LogisticReg.exe
+bin/Debug/LogisticReg.pdb
+bin/Debug/Thetasave.csv
+obj/Debug/LogisticReg.exe
+obj/Debug/LogisticReg.pdb
+.vs/LogisticReg/v16/Server/sqlite3/storage.ide
