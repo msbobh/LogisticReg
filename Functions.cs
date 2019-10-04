@@ -88,15 +88,15 @@ namespace Functions
             for (int i = 0; i < iterations; i++)
             {
                 error = (X * Theta) - y;
-                J_history[i] = MLFunctions.math.CostFunc(X, Theta,y,lambda);
                 Theta = Theta - ((alpha / m) * X.Transpose() * error);
                 Console.Write('.');
                 if ( i % Console.WindowWidth -1 == 0) Console.WriteLine();
+                J_history[i] = MLFunctions.math.CostFunc(X, Theta, y, lambda);
             }
             int x = 1;
             foreach (var cost in J_history)
             {
-                Console.WriteLine("J:{0}", cost);
+                Console.WriteLine("J = " + string.Format("{0:0.0000}", cost));
                 x++;
             }
             if ((utilityfunctions.WriteCSV(JValsFname, J_history) == false))
