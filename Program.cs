@@ -90,7 +90,7 @@ namespace LogisticReg
 
 
             
-            Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, ones_theta, alpha, iterations, Lambda);
+            Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations, Lambda);
 
             /* StreamWriter checkthis;
             try
