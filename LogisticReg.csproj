@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fmin.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="MLFunctions.cs" />
     <Compile Include="Program.cs" />

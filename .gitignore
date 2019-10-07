@@ -15,3 +15,5 @@ obj/Debug/LogisticReg.exe
 obj/Debug/LogisticReg.pdb
 .vs/LogisticReg/v16/Server/sqlite3/storage.ide
 obj/Debug/LogisticReg.csproj.FileListAbsolute.txt
+packages/alglib2.dll.3.10.4/
+packages.config
