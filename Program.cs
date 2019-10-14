@@ -60,8 +60,7 @@ namespace LogisticReg
              * THird Param = delimeter
              * Fourth has headers (T|F)
              */
-
-
+            
             Matrix<double> input = DelimitedReader.Read<double>(trainingfile, false, ",", false);
             Matrix<double> labels = DelimitedReader.Read<double>(labelfile, false, "'", false);
             if ((labels.RowCount != input.RowCount))
@@ -88,8 +87,14 @@ namespace LogisticReg
              * 
              */
 
-
+            // Test alglib
             
+            double foo = 0;
+            double[] grad = new double [118];
+            
+            minimize.fmin.function_grad(input, init_theta, labels, rows, Lambda, ref foo, grad);
+            // end test
+
             Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations, Lambda);
 
             /* StreamWriter checkthis;

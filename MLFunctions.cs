@@ -17,6 +17,11 @@ namespace MLFunctions
             return input;
         }
 
+        static public double Sigmoid (double input)
+        {
+            return MathNet.Numerics.SpecialFunctions.Logistic(input);
+        }
+
         static public double L2Regularization(Matrix<double> Theta, double lambda, int m)
         {
             /* Regularization term excluding theta (0) Note both L1 and L2
