@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.Data.Matlab;
-using MathNet.Numerics.Data.Text;
+using ILNumerics;
+using static ILNumerics.Globals;
+using static ILNumerics.ILMath;
+
+
 using Functions;
 using System.IO;
 using strings;
@@ -54,45 +52,48 @@ namespace LogisticReg
             // maybe add check for csv format??
 
             /*
-             * Delimited Reader Param description
-             * Delimited Reader (only Single, Double, Complex and COmplex32)
-             * second param Sparse (True) or dense matrix (false)
-             * THird Param = delimeter
-             * Fourth has headers (T|F)
+             * var file = File.ReadAllText("csvread_sample34x24.csv");
+                    Array<double> A = csvread<double>(file);
+
+            // or read as single precision
+                Array<float> S = csvread<float>(file);
              */
+            var file = File.ReadAllText(trainingfile);
+            Array<double> input = csvread<double>(file);
+            file = File.ReadAllText(labelfile);
+            Array<double> labels = csvread<double>(file);
+            
+            long rows = input.Size [0];
+            long cols = input.Size [1];
 
-
-            Matrix<double> input = DelimitedReader.Read<double>(trainingfile, false, ",", false);
-            Matrix<double> labels = DelimitedReader.Read<double>(labelfile, false, "'", false);
-            if ((labels.RowCount != input.RowCount))
+                        
+            if ((labels.Length != input.Length))
             {
-                Console.WriteLine(mystrings.SamplesDontMatch, labels.RowCount, input.RowCount);
+                Console.WriteLine(mystrings.SamplesDontMatch, labels.Length, input.Length);
             }
 
-            int rows = input.RowCount;
-            int cols = input.ColumnCount;
             Console.WriteLine("Training Set rows = {0}, Columns = {1}", rows, cols);
-            Console.WriteLine("Lable set rows = {0}, Columns = {1}", labels.RowCount, labels.ColumnCount);
+            Console.WriteLine("Label set rows = {0}, Columns = {1}", labels.Size[0], labels.Size[1]);
 
             // Initial guess for Theta is all zeros and n x 1 vector of zeros, where n is the number of features (columns)
 
-            Matrix<double> init_theta = Matrix<double>.Build.Dense(cols, 1);
-            Matrix<double> ones_theta = Matrix<double>.Build.Dense(cols, 1, 1);
+            Array <double> init_theta = zeros<double>(cols, 1);
+            Array <double> ones_theta = ones <double>(cols, 1);
+            Array<double> test_theta = rand (cols, 1); // Used this for testing chnages for ILNumerics
                         
             Console.WriteLine(mystrings.running, iterations);
 
-
+            
 
             /* Investigate using ILNumerics unconstrained optimizaiton code, otherwise will need 
              * to write a gradient descent routine. https://ilnumerics.net/unconstrained-optimization.html
              * 
              */
 
+                        
+            Array <double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations, Lambda);
 
-            
-            Matrix<double> theta = Functions.utilityfunctions.GradientDescent(input, labels, init_theta, alpha, iterations, Lambda);
-
-            /* StreamWriter checkthis;
+            StreamWriter checkthis;
             try
             {
                 checkthis = new StreamWriter("LearnedTheta.csv");
@@ -101,7 +102,7 @@ namespace LogisticReg
             catch (IOException)
             {
                 Console.WriteLine("Oopsie");
-            } */
+            } 
 
             if (!utilityfunctions.FileOpen(ThetaFile))
             {
@@ -110,7 +111,7 @@ namespace LogisticReg
             }
             else
             {
-                DelimitedWriter.Write(ThetaFile, theta, ",");
+                //csvwrite <double> (ThetaFile, theta);
             }
                 
             

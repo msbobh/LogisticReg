@@ -1,7 +1,6 @@
-﻿using MathNet.Numerics.Data.Matlab;
-using MathNet.Numerics.LinearAlgebra;
-using System;
-using Microsoft.VisualBasic.FileIO;
+﻿using System;
+using ILNumerics;
+using static ILNumerics.ILMath;
 using System.IO;
 
 
@@ -73,22 +72,23 @@ namespace Functions
         }
 
         
-        static public Matrix <double> GradientDescent(Matrix<double> X, Matrix<double> y, Matrix<double> Theta, double alpha, int iterations, double lambda)
-        {
-            /* Performs Gradient Descent to learn Theta, updates theta by
-             * taking num_iters gradient steps with learning rate alpha
-             */
+        static public RetArray <double> GradientDescent(InArray <double> X, InArray <double> y, Array <double> Theta, double alpha, int iterations, double lambda)
+        { 
+            // Performs Gradient Descent to learn Theta, updates theta by
+            // taking num_iters gradient steps with learning rate alpha
+            //
 
             double[] J_history = new double[iterations];
             J_history.Initialize();
-            Matrix<double> error;
-            string JValsFname = "JValues.csv";
-            
-            int m = X.RowCount;
+            Array <double> error;
+            string JValsFname = "JValues.csv"; // File to save the calculated error
+
+            long m = X.Size[0];
             for (int i = 0; i < iterations; i++)
             {
-                error = (X * Theta) - y;
-                Theta = Theta - ((alpha / m) * X.Transpose() * error);
+                error = ILMath.multiply(X, Theta) - y;
+                
+                Theta = Theta - ((alpha / m) * ILMath.multiply ( X.T , error));
                 Console.Write('.');
                 if ( i % Console.WindowWidth -1 == 0) Console.WriteLine();
                 J_history[i] = MLFunctions.math.CostFunc(X, Theta, y, lambda);
@@ -106,10 +106,9 @@ namespace Functions
             }
                 
             return Theta;
-        }
-
-        
-    }
+        } 
+                
+    } 
 }
 
  
