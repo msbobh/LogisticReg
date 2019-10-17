@@ -14,4 +14,7 @@ bin/Debug/Thetasave.csv
 obj/Debug/LogisticReg.exe
 obj/Debug/LogisticReg.pdb
 .vs/LogisticReg/v16/Server/sqlite3/storage.ide
+ILNumerics_deploy/
+bin/Debug/ILLogisticReg.exe
+bin/Debug/System.Runtime.CompilerServices.Unsafe.dll
 obj/Debug/LogisticReg.csproj.FileListAbsolute.txt
