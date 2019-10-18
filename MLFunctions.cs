@@ -1,6 +1,7 @@
 ﻿using ILNumerics;
 using static ILNumerics.Globals;
 using static ILNumerics.ILMath;
+using static ILNumerics.Data.Text;
 using System;
 
 namespace MLFunctions
@@ -65,7 +66,9 @@ namespace MLFunctions
 
             hypothesis = MLFunctions.math.Sigmoid(z);
             Array<double> testhypothesis = MLFunctions.math.Siggy(z);
-
+            Console.WriteLine("interitive sigmoid {0}", hypothesis.ToString);
+            Console.WriteLine("Vectorized sigmoid, {0}", testhypothesis.tostring);
+            Console.ReadKey;
             regterm = MLFunctions.math.L2Regularization(Theta, lambda, m);
 
 
